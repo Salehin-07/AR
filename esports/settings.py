@@ -8,9 +8,9 @@ DATABASE_URL = os.environ.get('DATABASE_URL', False)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-secret-key')
-DEBUG = os.environ.get('DJANGO_DEBUG', '1') == '1'
+DEBUG = False
 ALLOWED_HOSTS = [
-  'ar.onrender.com'
+  'ar-m47w.onrender.com/'
 ]
 
 INSTALLED_APPS = [
