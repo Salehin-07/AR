@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1>My Applications</h1>
+  <ul class="applications">
+    {% for r in object_list %}
+      <li class="app-card">
+        <h3>{{ r.tournament.title }}</h3>
+        <p>Game: {{ r.tournament.game_name }} — Start: {{ r.tournament.start_datetime|date:'DATETIME_FORMAT' }}</p>
+        <p>Applied at: {{ r.created_at|date:'DATETIME_FORMAT' }}</p>
+        <p>Paid: {{ r.paid }}</p>
+        {% if r.paid and r.tournament.credentials %}
+          <div class="credentials"><strong>Credentials:</strong><pre>{{ r.tournament.credentials|linebreaksbr }}</pre></div>
+        {% endif %}
+        <p><a href="{% url 'core:tournament_detail' pk=r.tournament.pk %}">View tournament</a></p>
+      </li>
+    {% empty %}
+      <li>You have no active applications.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

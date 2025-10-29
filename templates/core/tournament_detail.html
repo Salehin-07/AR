@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ object.title }}{% endblock %}
+{% block content %}
+<div class="detail">
+  {% if credentials_visible %}
+      <section class="credentials">
+        <h3>Credentials</h3>
+        <pre>{{ object.credentials|linebreaksbr }}</pre>
+      </section>
+    {% else %}
+      <h3>Credentials</h3>
+      <p>ID and Password will be visibal after you pay and it will be issued just before the match starts</p>
+    {% endif %}
+</div>
+<hr>
+<br>
+<hr>
+<div class="detail">
+  <div class="left">
+    <h1>{{ object.title }}</h1>
+    <p class="game">{{ object.game_name }}</p>
+    <p class="desc">{{ object.description }}</p>
+    <ul class="meta-list">
+      <li><strong>Start:</strong> {{ object.start_datetime|date:'DATETIME_FORMAT' }}</li>
+      <li><strong>Entry:</strong> {{ object.entry_fee }}</li>
+    </ul>
+    <p class="prizes">Prizes: {{ object.prize_first }}, {{ object.prize_second }}, {{ object.prize_third }}</p>
+  </div>
+  <aside class="right">
+    {% if user.is_authenticated %}
+      <div class="join-box">
+        <h3>Join Tournament</h3>
+        <form id="joinForm" method="post" action="{% url 'core:tournament_join' pk=object.pk %}">
+          {% csrf_token %}
+          <label>WhatsApp number<br><input name="whatsapp_number" required pattern="\+?[0-9\-\s]{9,}" placeholder="+8801xxxx..."></label>
+          <label>Profile URL (Facebook/Instagram)<br><input name="social_profile_url" type="url" required placeholder="https://..."></label>
+          <button class="btn" type="submit">Submit</button>
+        </form>
+      </div>
+      <p><a href="{% url 'core:my_applications' %}">My Applications</a></p>
+    {% else %}
+      <p><a href="{% url 'accounts:login' %}?next={% url 'core:tournament_detail' pk=object.pk %}">Login to join</a></p>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+document.getElementById('joinForm')?.addEventListener('submit', function(e){
+  var w = this.whatsapp_number.value.trim();
+  var p = this.social_profile_url.value.trim();
+  if(w.replace(/\D/g,'').length < 9){ alert('Enter a valid WhatsApp number'); e.preventDefault(); return false; }
+  try { new URL(p); } catch(err){ alert('Enter a valid profile URL'); e.preventDefault(); return false; }
+});
+</script>
+{% endblock %}

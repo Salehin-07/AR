@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1>Join Requests (Admin)</h1>
+  <hr>
+  <table>
+    <tr><th>Tournament</th><th>User</th><th>WhatsApp</th><th>Profile</th><th>Paid</th><th>Actions</th></tr>
+    <hr>
+    {% for r in object_list %}
+    <tr>
+      <td>{{ r.tournament.title }}</td>
+      <td>{{ r.user.username }}</td>
+      <td>{{ r.whatsapp_number }}</td>
+      <td><a href="{{ r.social_profile_url }}" target="_blank">profile</a></td>
+      <td>{{ r.paid }}</td>
+      <td><a href="{% url 'core:admin_request_detail' pk=r.pk %}">View</a></td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6">No requests</td></tr>
+    {% endfor %}
+  </table>
+  <hr>
+{% endblock %}

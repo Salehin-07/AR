@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1>Request for {{ object.tournament.title }}</h1>
+  <p>User: {{ object.user.username }}</p>
+  <p>WhatsApp: {{ object.whatsapp_number }}</p>
+  <p>Profile: <a href="{{ object.social_profile_url }}" target="_blank">link</a></p>
+  <p>Paid: {{ object.paid }}</p>
+  <form method="post">{% csrf_token %}
+    {% if not object.paid %}
+      <button name="action" value="mark_paid">Mark as paid</button>
+    {% else %}
+      <button name="action" value="mark_unpaid">Mark as unpaid</button>
+    {% endif %}
+    <div>
+      <label>Add note:<br><textarea name="note"></textarea></label><br>
+      <button name="action" value="add_note">Save Note</button>
+    </div>
+  </form>
+  <p><a href="{% url 'core:admin_requests' %}">Back</a></p>
+{% endblock %}

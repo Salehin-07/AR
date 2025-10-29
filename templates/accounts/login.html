@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Login</h1>
+  <p class="warning"><strong>If you forget the password or username you can never log into that account.</strong></p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">Login</button>
+  </form>
+</div>
+{% endblock %}

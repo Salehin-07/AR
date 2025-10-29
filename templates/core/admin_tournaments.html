@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1>Tournaments (Admin)</h1>
+  <ul>
+    {% for t in object_list %}
+      <li>{{ t.title }} — <a href="{% url 'core:credential_update' pk=t.pk %}">Edit credentials</a></li>
+    {% empty %}
+      <li>No tournaments yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

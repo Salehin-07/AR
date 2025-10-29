@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Tournaments{% endblock %}
+{% block content %}
+<h1>Tournaments</h1>
+<div class="grid">
+  {% for t in object_list %}
+    <article class="card">
+      <header><h2>{{ t.title }}</h2><small>{{ t.game_name }}</small></header>
+      <div class="meta">
+        <div>Start: {{ t.start_datetime|date:'DATETIME_FORMAT' }}</div>
+        <div>Entry: {{ t.entry_fee }}</div>
+      </div>
+      <p class="prizes">Prizes: <strong>{{ t.prize_first }}</strong>, {{ t.prize_second }}, {{ t.prize_third }}</p>
+      <div class="actions"><a class="btn" href="{% url 'core:tournament_detail' pk=t.pk %}">View / Join</a></div>
+    </article>
+  {% empty %}
+    <p>No tournaments yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}
