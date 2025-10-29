@@ -10,7 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-secret-key')
 DEBUG = False
 ALLOWED_HOSTS = [
-  'ar-m47w.onrender.com/'
+  'ar-m47w.onrender.com'
+  '.onrender.com'
 ]
 
 INSTALLED_APPS = [
