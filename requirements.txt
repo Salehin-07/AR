@@ -5,3 +5,5 @@ gunicorn
 whitenoise
 django-compressor
 python-dotenv
+psycopg
+psycopg2
