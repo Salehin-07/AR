@@ -1,0 +1,7 @@
+Django>=4.2,<4.3
+dj-database-url
+django-jazzmin
+gunicorn
+whitenoise
+django-compressor
+python-dotenv
