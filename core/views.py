@@ -27,6 +27,7 @@ class TournamentDetailView(DetailView):
         if tournament.credentials:
             if user.is_authenticated and tournament.join_requests.filter(user=user, paid=True).exists():
                 ctx['credentials_visible'] = True
+        ctx['join_request_count'] = tournament.join_requests.filter(paid=True).count()
         return ctx
 
 class TournamentJoinCreateView(LoginRequiredMixin, CreateView):
