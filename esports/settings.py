@@ -12,6 +12,9 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-secret-key')
 DEBUG = False
 ALLOWED_HOSTS = [
   'ar-sr.onrender.com',
+  '.onrender.com',
+  '74.220.48.0/24',
+  '74.220.56.0/24'
 ]
 
 INSTALLED_APPS = [
