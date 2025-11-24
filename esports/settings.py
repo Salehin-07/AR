@@ -11,10 +11,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-secret-key')
 #DEBUG = os.environ.get('DJANGO_DEBUG', '1') == '1'
 DEBUG = False
 ALLOWED_HOSTS = [
-  'ar-sr.onrender.com',
-  '.onrender.com',
-  '74.220.48.0/24',
-  '74.220.56.0/24'
+    'ar-sr.onrender.com',
+    '*.onrender.com',
 ]
 
 INSTALLED_APPS = [
@@ -118,3 +116,26 @@ else :
 #   SECURE_BROWSER_XSS_FILTER = True
 #   SECURE_CONTENT_TYPE_NOSNIFF = True
 #   X_FRAME_OPTIONS = "DENY"
+
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+    },
+}
+
+
+COMPRESS_ENABLED = False
+#COMPRESS_OFFLINE = True  # For production
