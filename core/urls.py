@@ -1,8 +1,10 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
 from . import views
+
 app_name = 'core'
 urlpatterns = [
-    path('', views.TournamentListView.as_view(), name='tournament_list'),
+    path('', cache_page(60 * 15)(views.TournamentListView.as_view()), name='tournament_list'),
     path('tournament/<uuid:pk>/', views.TournamentDetailView.as_view(), name='tournament_detail'),
     path('tournament/<uuid:pk>/join/', views.TournamentJoinCreateView.as_view(), name='tournament_join'),
     path('my/applications/', views.MyApplicationsView.as_view(), name='my_applications'),
