@@ -7,7 +7,7 @@ def can_see(user):
     if not user or user.is_anonymous:
         return False
 
-    has_admin = user.groups.filter(name='admin').exists()
+    has_admin = user.groups.filter(name='Admin').exists()
     has_npay = user.groups.filter(name='NPay').exists()
     has_superadmin = user.groups.filter(name='Superadmin').exists()
 
