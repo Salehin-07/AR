@@ -1,4 +1,4 @@
-Django>=4.2,<4.3
+Django
 dj-database-url
 django-jazzmin
 gunicorn
@@ -6,3 +6,4 @@ whitenoise
 django-compressor
 python-dotenv
 psycopg2
+django-pwa
